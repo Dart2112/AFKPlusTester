@@ -1,0 +1,3 @@
+ConfigVersion: 1
+MustBePlayer: "You must be a player to use this command"
+NotOp: "You must be an operator to use this command"

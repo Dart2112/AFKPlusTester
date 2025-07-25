@@ -1,0 +1,4 @@
+name: AFKPlusTester
+version: ${project.version}
+main: net.lapismc.afkplustester.AFKPlusTester
+api-version: '1.21'
