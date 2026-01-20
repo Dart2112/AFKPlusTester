@@ -17,7 +17,7 @@ repositories {
     //Personal Repo
     maven {
         name = "lapismc-repo"
-        url = "https://maven.lapismc.net/repository/maven/"
+        url = "https://maven.lapismc.net/releases/"
     }
     maven {
         name = "sonatype"
@@ -26,9 +26,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.lapismc:LapisCore:1.13.5'
-    compileOnly('net.lapismc:AFKPlus:3.5.0')
-    compileOnly('io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT')
+    implementation 'net.lapismc:LapisCore:1.13.9'
+    compileOnly('net.lapismc:AFKPlus:3.5.1')
+    compileOnly('io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT')
 }
 
 def targetJavaVersion = 21
