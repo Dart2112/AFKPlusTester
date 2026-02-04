@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.lapismc:LapisCore:1.13.9'
+    implementation('net.lapismc:LapisCore:1.13.11')
     compileOnly('net.lapismc:AFKPlus:3.5.1')
     compileOnly('io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT')
 }
