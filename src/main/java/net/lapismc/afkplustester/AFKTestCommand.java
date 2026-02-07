@@ -16,7 +16,10 @@ import net.lapismc.lapiscore.commands.LapisCoreCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.codehaus.plexus.util.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -54,10 +57,15 @@ public class AFKTestCommand extends LapisCoreCommand {
             Bukkit.getPlayer(player.getUUID()).sendMessage(plugin.config.getMessage("NotOp"));
             return;
         }
-        //TODO: Take a backup of the config and restore it at the end
+        //Take a backup of the config and restore it at the end
         //This way the tests can use the default config without impacting setting I have set after tests complete
         //Like update downloads being disabled
-        
+        File config = new File(plugin.getDataFolder(), "config.yml");
+        File configBackup = new File(plugin.getDataFolder(), "config-bak.yml");
+        try {
+            FileUtils.copyFile(config, configBackup);
+        } catch (IOException ignored) {
+        }
         //Start testing
         AtomicInteger passed = new AtomicInteger();
         AtomicInteger failed = new AtomicInteger();
@@ -84,6 +92,7 @@ public class AFKTestCommand extends LapisCoreCommand {
             plugin.getLogger().info("All tests completed:");
             plugin.getLogger().info("Passed: " + passed.get());
             plugin.getLogger().info("Failed: " + failed.get());
+            plugin.tasks.runTask(() -> configBackup.renameTo(config), false);
         }, true);
     }
 }
