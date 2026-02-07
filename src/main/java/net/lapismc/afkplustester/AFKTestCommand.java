@@ -34,15 +34,18 @@ public class AFKTestCommand extends LapisCoreCommand {
     public AFKTestCommand(AFKPlusTester plugin) {
         super(plugin, "AFKTest", "Run a suite of tests on AFKPlus", new ArrayList<>());
         this.plugin = plugin;
-        afkPlus = new AFKPlusAPI().getPlugin();
-        playerAPI = new AFKPlusPlayerAPI();
-        tests.add(new APIAFKStartTest());
-        tests.add(new APIAFKStopTest(plugin));
-        tests.add(new CommandStartAFK());
-        tests.add(new CommandStopAFK());
-        tests.add(new TimedAFKStart(afkPlus));
-        tests.add(new MovementAFKStop());
-        tests.add(new ChatAFKStop());
+        //Run this in a task so that it will always run after AFKPlus has finished starting
+        plugin.tasks.runTask(() -> {
+            afkPlus = new AFKPlusAPI().getPlugin();
+            playerAPI = new AFKPlusPlayerAPI();
+            tests.add(new APIAFKStartTest());
+            tests.add(new APIAFKStopTest(plugin));
+            tests.add(new CommandStartAFK());
+            tests.add(new CommandStopAFK());
+            tests.add(new TimedAFKStart(afkPlus));
+            tests.add(new MovementAFKStop());
+            tests.add(new ChatAFKStop());
+        }, false);
     }
 
     @Override
